@@ -16,7 +16,7 @@ test("should fetch transaction count for an address", async () => {
 
   expect(details).toEqual({
     address,
-    transactionCount: 23,
+    transactionCount: expectedTransactionCount,
   });
 
   expect(getAddressDetails).toHaveBeenCalledTimes(1);
