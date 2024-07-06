@@ -1,7 +1,7 @@
-// import fetch from 'node-fetch';
+import dotenv from "dotenv";
+dotenv.config(); // Load environment variables
 
-const apiKey = "alcht_FmQf3SL1rSoOGXcivayMEvZDsXbmzz";
-// const apiKey = "WJp3SgUbkkcBbxe2VWWHdgUqyFouGEWG";
+const apiKey = process.env.API_KEY || "";
 const url = `https://base-mainnet.g.alchemy.com/v2/${apiKey}`;
 
 export const getAddressDetails = async (
