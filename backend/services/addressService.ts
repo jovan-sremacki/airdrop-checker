@@ -1,37 +1,36 @@
+import { Network, Alchemy, AssetTransfersCategory } from "alchemy-sdk";
 import dotenv from "dotenv";
+
 dotenv.config(); // Load environment variables
 
 const apiKey = process.env.API_KEY || "";
-const url = `https://base-mainnet.g.alchemy.com/v2/${apiKey}`;
+const settings = {
+  apiKey: apiKey,
+  network: Network.BASE_MAINNET,
+};
 
-export const getAddressDetails = async (
-  address: string
-): Promise<{ address: string; transactionCount: number }> => {
-  const options = {
-    method: "POST",
-    headers: { accept: "application/json", "content-type": "application/json" },
-    body: JSON.stringify({
-      id: 1,
-      jsonrpc: "2.0",
-      params: [address, "latest"],
-      method: "eth_getTransactionCount",
-    }),
-  };
-
+export const getAddressDetails = async (address: string): Promise<void> => {
   try {
-    const response = await fetch(url, options);
-    const data = await response.json();
+    const alchemy = new Alchemy(settings);
 
-    console.log(`Response data: ${data.result}`);
+    const response = await alchemy.core.getAssetTransfers({
+      fromAddress: address,
+      excludeZeroValue: true,
+      category: [
+        AssetTransfersCategory.EXTERNAL,
+        AssetTransfersCategory.ERC20,
+        AssetTransfersCategory.ERC721,
+      ],
+    });
 
-    if (data.error) {
-      throw new Error(data.error.message);
-    }
-
-    // Convert transaction count from hexadecimal to decimal
-    const transactionCount = parseInt(data.result, 16);
-
-    return { address, transactionCount };
+    const volume = response.transfers.reduce((acc, item) => {
+      if (item.from.toLowerCase() == address.toLowerCase()) {
+        if (item.value) {
+          return acc + item.value;
+        }
+      }
+      return 0;
+    }, 0);
   } catch (error: any) {
     console.error("Error fetching address details: " + error.message);
     throw error;
