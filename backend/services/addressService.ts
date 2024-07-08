@@ -36,10 +36,12 @@ export const getAddressDetails = async (
   }
 };
 
-async function isContractAddress(addr: string): Promise<boolean> {
-  return await alchemy.core.isContractAddress(addr);
-}
-
+/**
+ * Fetches the token transfers associated with the specified address.
+ *
+ * @param address - The address to fetch the token transfers for.
+ * @returns A Promise that resolves to an AssetTransfersResponse object containing the token transfers.
+ */
 async function getAssetTransfers(
   address: string
 ): Promise<AssetTransfersResponse> {
