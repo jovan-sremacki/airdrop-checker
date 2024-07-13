@@ -14,6 +14,8 @@ describe("AirdropChecker Integration Test", () => {
   });
 
   it("should fetch address details correctly", async () => {
+    jest.spyOn(airdropChecker as any, "getUsdVolume").mockResolvedValue(2000);
+
     try {
       const result = await airdropChecker.getAddressDetails(address);
 
