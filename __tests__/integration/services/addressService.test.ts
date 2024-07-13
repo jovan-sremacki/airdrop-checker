@@ -25,5 +25,5 @@ describe("AirdropChecker Integration Test", () => {
       console.error("Integration test failed:", error);
       throw error;
     }
-  });
+  }, 15000);
 });
