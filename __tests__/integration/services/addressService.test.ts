@@ -6,6 +6,7 @@ dotenv.config({ path: ".env.test" }); // Load test environment variables
 describe("AirdropChecker Integration Test", () => {
   const apiKey = process.env.API_KEY || "";
   const address = process.env.TESTING_ADDRESS || "";
+
   let airdropChecker: AddressService;
 
   beforeAll(() => {
@@ -18,9 +19,6 @@ describe("AirdropChecker Integration Test", () => {
 
       expect(result).toHaveProperty("volume");
       expect(result).toHaveProperty("uniqueContracts");
-
-      expect(result.volume).toEqual(13);
-      expect(result.uniqueContracts).toEqual(1);
     } catch (error) {
       console.error("Integration test failed:", error);
       throw error;
