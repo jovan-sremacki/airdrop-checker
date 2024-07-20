@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      API_KEY: $${{ secrets.API_KEY}}
+      TESTING_ADDRESS: $${{ secrets.TESTING_ADDRESS }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
