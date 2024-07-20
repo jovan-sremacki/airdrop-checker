@@ -17,12 +17,6 @@ jobs:
       TESTING_ADDRESS: $${{ secrets.TESTING_ADDRESS }}
 
     steps:
-      - name: Print api key
-        run: printenv | grep API_KEY
-
-      - name: Print testing address
-        run: printenv | grep TESTING_ADDRESS
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -36,6 +30,12 @@ jobs:
 
       - name: Compile TypeScript
         run: npm run build
+
+      - name: Print api key
+        run: printenv | grep API_KEY
+
+      - name: Print testing address
+        run: printenv | grep TESTING_ADDRESS
 
       - name: Run unit tests
         run: npm run test:unit
