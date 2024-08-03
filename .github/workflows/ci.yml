@@ -13,9 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      API_KEY: 'alcht_FmQf3SL1rSoOGXcivayMEvZDsXbmzz'
-      TESTING_ADDRESS: '0xdFd1656602DB564661522daAd0ADB0b98d581050'
-      # TESTING_ADDRESS: $${{ secrets.TESTING_ADDRESS }}
+      API_KEY: $${{ secrets.API_KEY }}
+      TESTING_ADDRESS: $${{ secrets.TESTING_ADDRESS }}
 
     steps:
       - name: Checkout repository
