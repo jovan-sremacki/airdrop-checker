@@ -39,14 +39,7 @@ class BaseService {
     address: string
   ): Promise<AssetTransfersResponse> {
     try {
-      console.log(`Alchemy object is ${this.alchemy.core}`);
-    } catch (error: any) {
-      console.error("There is something wrong with this object");
-    }
-
-    try {
       return await this.alchemy.core.getAssetTransfers({
-        fromBlock: "0x0",
         fromAddress: address,
         excludeZeroValue: false,
         category: [
