@@ -31,11 +31,6 @@ jobs:
       - name: Compile TypeScript
         run: npm run build
 
-      - name: Print env variables
-        run: |
-          echo "API_KEY is set to: $API_KEY"
-          echo "TESTING_ADDRESS is set to: $TESTING_ADDRESS"
-
       - name: Check env variables
         run: |
           if [ -z "$API_KEY" ]; then echo "API_KEY is not set"; else echo "API_KEY is set"; fi

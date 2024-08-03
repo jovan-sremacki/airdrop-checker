@@ -9,7 +9,10 @@ class TransactionsService extends BaseService {
     address: string
   ): Promise<{ [key: string]: string }> {
     return new Promise((resolve, reject) => {
-      const workerPath = path.resolve(__dirname, "../workers/transactionWorker.js");
+      const workerPath = path.resolve(
+        __dirname,
+        "../workers/transactionWorker.js"
+      );
 
       const worker = new Worker(workerPath, {
         workerData: { transfers, address },

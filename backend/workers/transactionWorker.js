@@ -1,7 +1,6 @@
-const { parentPort, getEnvironmentData } = require("worker_threads");
+const { parentPort } = require("worker_threads");
 
 parentPort?.on("message", ({ transfers, address }) => {
-
   const transactionTypes = {};
 
   for (const transfer of transfers) {
@@ -23,4 +22,5 @@ parentPort?.on("message", ({ transfers, address }) => {
   }
 
   parentPort?.postMessage(percentageOfTransactionTypes);
+  parentPort?.close();
 });
