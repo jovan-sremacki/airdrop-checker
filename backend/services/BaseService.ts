@@ -39,17 +39,19 @@ class BaseService {
     address: string
   ): Promise<AssetTransfersResponse> {
     try {
-      return await this.alchemy.core.getAssetTransfers({
-        fromBlock: "0x0",
-        fromAddress: address,
-        excludeZeroValue: false,
-        category: [
-          AssetTransfersCategory.EXTERNAL,
-          AssetTransfersCategory.ERC20,
-          AssetTransfersCategory.ERC721,
-          AssetTransfersCategory.ERC1155,
-        ],
-      });
+      console.log(this.alchemy.core);
+      
+      // return await this.alchemy.core.getAssetTransfers({
+      //   fromBlock: "0x0",
+      //   fromAddress: address,
+      //   excludeZeroValue: false,
+      //   category: [
+      //     AssetTransfersCategory.EXTERNAL,
+      //     AssetTransfersCategory.ERC20,
+      //     AssetTransfersCategory.ERC721,
+      //     AssetTransfersCategory.ERC1155,
+      //   ],
+      // });
     } catch (error: any) {
       console.error("Error fetching asset transfers:", error);
       throw new Error("Failed to fetch asset transfers");
