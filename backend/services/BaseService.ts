@@ -39,7 +39,7 @@ class BaseService {
     address: string
   ): Promise<AssetTransfersResponse> {
     try {
-      console.log(`Alchemy object is ${this.alchemy}`);
+      console.log(`Alchemy object is ${this.alchemy.core}`);
     } catch (error: any) {
       console.error("There is something wrong with this object");
     }
