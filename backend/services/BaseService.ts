@@ -25,9 +25,9 @@ class BaseService {
    */
   protected async getTransfers(
     address: string
-  ): Promise<AssetTransfersResult[]> {
+  ): Promise<void> {
     const transfers = await this.getAssetTransfers(address);
-    return transfers.transfers;
+    // return transfers.transfers;
   }
 
   /**
@@ -37,7 +37,7 @@ class BaseService {
    */
   private async getAssetTransfers(
     address: string
-  ): Promise<AssetTransfersResponse> {
+  ): Promise<void> {
     try {
       console.log(this.alchemy.core);
       
