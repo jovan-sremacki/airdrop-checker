@@ -25,7 +25,24 @@ function loadServices(folderPath) {
 
 let services = loadServices("./backend/services");
 
+const historyFile = path.resolve(__dirname, '.ts_node_repl_history');
+const maxHistoryItems = 1000;
+
 const replServer = repl.start("> ");
+
+// Load history
+fs.readFile(historyFile, 'utf8', (err, data) => {
+  if (err) return;
+  replServer.history = data.split('\n').reverse().filter(Boolean);
+});
+
+// Save history
+replServer.on('exit', () => {
+  fs.writeFile(historyFile, replServer.history.reverse().slice(0, maxHistoryItems).join('\n'), (err) => {
+    if (err) console.error(err);
+    process.exit();
+  });
+});
 
 replServer.context.services = services;
 replServer.context.addrService = new services.AddressService(process.env.API_KEY);

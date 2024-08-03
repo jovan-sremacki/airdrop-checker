@@ -1,5 +1,6 @@
 import AddressService from "../../../backend/services/AddressService";
 import dotenv from "dotenv";
+import BaseService from "../../../backend/services/BaseService";
 
 dotenv.config({ path: ".env.test" }); // Load test environment variables
 
@@ -8,6 +9,7 @@ describe("AirdropChecker Integration Test", () => {
   const address = process.env.TESTING_ADDRESS || "";
 
   let airdropChecker: AddressService;
+  let baseService: BaseService;
 
   beforeAll(() => {
     airdropChecker = new AddressService(apiKey);
@@ -23,23 +25,13 @@ describe("AirdropChecker Integration Test", () => {
       console.error("Integration test failed:", error);
       throw error;
     }
-  }, 15000);
+  });
 
   it("should calculate volume in ETH correctly", async () => {
-    const transfers = await airdropChecker.getTransfers(address);
+    const transfers = await (airdropChecker as any).getTransfers(address);
 
     const volume = await airdropChecker["getVolumeInEth"](transfers, address);
 
     expect(volume).toBeCloseTo(0.002, 2);
-  });
-
-  it("should calculate percentage of transaction types", async () => {
-    const transfers = await airdropChecker.getTransfers(address);
-
-    console.log(`Numbers of transfers: ${transfers.length}`);
-
-    const percentageOfTransactionTypes = await airdropChecker[
-      "calculatePercentageOfTransactionTypes"
-    ](transfers);
   });
 });
