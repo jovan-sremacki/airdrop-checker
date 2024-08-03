@@ -38,7 +38,9 @@ class BaseService {
   private async getAssetTransfers(
     address: string
   ): Promise<AssetTransfersResponse> {
-    console.log(`Address is ${address.toString()}`);
+    if (!address) {
+      console.log('Address does not exist.');
+    }
     
     try {
       return await this.alchemy.core.getAssetTransfers({
