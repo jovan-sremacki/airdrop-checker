@@ -37,8 +37,8 @@ jobs:
       - name: Print testing address
         run: printenv | grep TESTING_ADDRESS
 
-      - name: Run unit tests
-        run: npm run test:unit
+      # - name: Run unit tests
+      #   run: npm run test:unit
 
-      # - name: Run integration tests
-      #   run: npm run test:integration
+      - name: Run integration tests
+        run: npm run test:integration
