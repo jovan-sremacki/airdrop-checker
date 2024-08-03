@@ -38,6 +38,8 @@ class BaseService {
   private async getAssetTransfers(
     address: string
   ): Promise<AssetTransfersResponse> {
+    console.log(`Address is ${address}`);
+    
     try {
       return await this.alchemy.core.getAssetTransfers({
         fromAddress: address,
