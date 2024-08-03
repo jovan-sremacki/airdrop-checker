@@ -1,7 +1,6 @@
 // src/index.ts
 import express, { Application, Request, Response } from "express";
 import addressRoutes from "./routes/addressRoutes";
-import AddressService from "./services/AddressService";
 
 const app: Application = express();
 const PORT = process.env.PORT || 3000;

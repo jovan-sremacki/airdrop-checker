@@ -1,13 +1,8 @@
-import { parentPort, workerData } from 'worker_threads';
-import { AssetTransfersResult } from 'alchemy-sdk';
+const { parentPort, getEnvironmentData } = require("worker_threads");
 
-interface WorkerData {
-  transfers: AssetTransfersResult[];
-  address: string;
-}
+parentPort?.on("message", ({ transfers, address }) => {
 
-parentPort?.on('message', ({ transfers, address }: WorkerData) => {
-  const transactionTypes: { [key: string]: number } = {};
+  const transactionTypes = {};
 
   for (const transfer of transfers) {
     if (transfer.from.toLowerCase() === address.toLowerCase()) {
@@ -18,7 +13,7 @@ parentPort?.on('message', ({ transfers, address }: WorkerData) => {
     }
   }
 
-  const percentageOfTransactionTypes: { [key: string]: string } = {};
+  const percentageOfTransactionTypes = {};
 
   for (const type in transactionTypes) {
     percentageOfTransactionTypes[type] = (
